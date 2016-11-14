@@ -20,7 +20,7 @@ class State {
         const int getHitPoints() const;
         const int getHitPointsLimit() const;
         const int getDamage() const;
-        const std::string getTitle() const;
+        const std::string& getTitle() const;
         
         void addHitPoints(int hp);
         void takeDamage(int dmg);

@@ -18,7 +18,7 @@ const int State::getHitPointsLimit() const {
     return  this->damage;
 }
 
-const std::string State::getTitle() const {
+const std::string& State::getTitle() const {
     return this->title;
 }
 
@@ -50,7 +50,7 @@ void State::takeDamage(int dmg) {
     this->hitPoints -= dmg;
 }
 
-std::iostream& operator<<(std::iostream& out, const  State& state) {
+std::ostream& operator<<(std::ostream& out, const  State& state) {
     out << "[" << state.getTitle() << ", ";
     out << "HP " << state.getHitPoints() << "/" << state.getHitPointsLimit() << ", ";
     out << "Damage "<<state.getDamage() << "]";
