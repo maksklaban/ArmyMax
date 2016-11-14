@@ -2,7 +2,7 @@
 #define STATE_H
 
 #include <iostream>
-#include <../exception.h>
+#include "../exception.h"
 
 class State {
     protected:
@@ -17,7 +17,6 @@ class State {
         State(int hitPoints, int damage, std::string nickName);
         virtual ~State();
         
-        const int getHitPoints() const;
         const int getHitPoints() const;
         const int getHitPointsLimit() const;
         const int getDamage() const;

@@ -1,12 +1,10 @@
 #include "State.h"
 
-State::State(int hitPoints, int damage, std::string nickName) : hitPoints(hitPoints), hitPointsLimit(hitPoints), damage(damage), nickName(nickName) {}
+State::State(int hitPoints, int damage, std::string nickName) : hitPoints(hitPoints), hitPointsLimit(hitPoints), damage(damage), nickName(nickName) {
+    ensureIsAlive();
+}
 
 State::~State() {}
-
-const int State::getHitPoints() const {
-    return  this->hitPoints;
-}
 
 const int State::getHitPoints() const {
     return  this->hitPoints;
@@ -26,7 +24,7 @@ const std::string State::getNickName() const {
 
 void State::ensureIsAlive() {
     if (hitPoints == 0) {
-        throw NoHitPointsExcaption();
+        throw NoHitPointsException();
     }
 }
 
