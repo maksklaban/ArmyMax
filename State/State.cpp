@@ -1,6 +1,6 @@
 #include "State.h"
 
-State::State(int hitPoints, int damage, std::string nickName) : hitPoints(hitPoints), hitPointsLimit(hitPoints), damage(damage), nickName(nickName) {
+State::State(int hitPoints, int damage, std::string title) : hitPoints(hitPoints), hitPointsLimit(hitPoints), damage(damage), title(title) {
     ensureIsAlive();
 }
 
@@ -18,8 +18,8 @@ const int State::getHitPointsLimit() const {
     return  this->damage;
 }
 
-const std::string State::getNickName() const {
-    return this->nickName;
+const std::string State::getTitle() const {
+    return this->title;
 }
 
 void State::ensureIsAlive() {
@@ -51,7 +51,7 @@ void State::takeDamage(int dmg) {
 }
 
 std::iostream& operator<<(std::iostream& out, const  State& state) {
-    out << "[" << state.getNickName() << ", ";
+    out << "[" << state.getTitle() << ", ";
     out << "HP " << state.getHitPoints() << "/" << state.getHitPointsLimit() << ", ";
     out << "Damage "<<state.getDamage() << "]";
     
