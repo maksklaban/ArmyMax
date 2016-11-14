@@ -1,6 +1,6 @@
 #include "Unit.h"
 
-Unit::Unit(int damage, int hitPoints, std::string nickName, std::string title) : nickName(nickName), state(new State(hitPoints, damage, title));
+Unit::Unit(int damage, int hitPoints, std::string nickName, std::string title) : nickName(nickName), state(new State(hitPoints, damage, title)) {}
 
 Unit::~Unit() {
     delete state;
@@ -31,11 +31,11 @@ const State& Unit::getState() const {
 }
 
 void Unit::takeDamage(int dmg) {
-    this->state->takeDamage(int dmg);
+    this->state->takeDamage(dmg);
 }
 
 void Unit::addHitPoints(int hp) {
-    this->state->addHitPoints(int hp);
+    this->state->addHitPoints(hp);
 }
 
 void Unit::attack(Unit* enemy) {
@@ -47,7 +47,8 @@ void Unit::counterAttack(Unit* enemy) {
     enemy->takeDamage(this->getDamage() / 2);
 }
 
-std::iostream& operator<<(std::iostream out, Unit& unit) {
+std::ostream& operator<<(std::ostream& out, const Unit& unit) {
     out << unit.getNickName() << " " << unit.getState();
+    
     return out;
 }

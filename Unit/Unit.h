@@ -2,10 +2,10 @@
 #define UNIT_H
 
 #include <iostream>
-#include <../State/State.h>
-#include <../exception.h>
+#include "../State/State.h"
+#include "../exception.h"
 
-class Unit : public State {
+class Unit {
     protected:
         State* state;
         std::string nickName;
@@ -22,10 +22,11 @@ class Unit : public State {
         
         void takeDamage(int dmg);
         void addHitPoints(int hp);
-        void attack(Unit* enemy);
-        void counterAttack(int dmg);
+        
+        virtual void attack(Unit* enemy) = 0;
+        virtual void counterAttack(Unit* enemy);
 };
 
-std::iostream& operator<<(std::iostream out, Unit& unit);
+std::ostream& operator<<(std::ostream& out, const Unit& unit);
 
 #endif // UNIT_H
