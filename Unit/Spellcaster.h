@@ -7,6 +7,8 @@
 
 class Spellcaster : public Unit, public Spell {
     protected:
+        Unit* unit;
+        Spell* spellBook;
         int manaPoints;
         int manaPointsLimit;
         
@@ -18,10 +20,13 @@ class Spellcaster : public Unit, public Spell {
         const int getManaPoints() const;
         const int getManaPointsLimit() const;
         const Unit& getUnitState() const;
-        const Spell& getSpellList() const;
+        const Spell& getSpellBook() const;
         
         void addManaPoints(int mp);
         void spendManaPoints(int mp);
+        
+        virtual void attack(Unit* enemy);
+        virtual void counterAttack(Unit* enemy);
         virtual void castFireball(Unit* enemy) = 0;
         virtual void castHeal(Unit* other) = 0;
 };

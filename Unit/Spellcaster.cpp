@@ -13,11 +13,11 @@ const int Spellcaster::getManaPointsLimit() const {
 }
 
 const Unit& Spellcaster::getUnitState() const {
-    return *(this->Unit);
+    return *(this->unit);
 }
 
-const Spell& Spellcaster::getSpellList() const {
-    return *(this->Spell);
+const Spell& Spellcaster::getSpellBook() const {
+    return *(this->spellBook);
 }
 
 void Spellcaster::ensureIsAlive() {
@@ -49,21 +49,26 @@ void Spellcaster::spendManaPoints(int mp) {
     this->manaPoints -= mp;
 }
 
-void Spellcaster::castFireball(Unit* enemy, std::map<CAST_ENUM, int>* spellList) {
-    enemy->ensureIsAlive();
-    
-    this->spendManaPoints(this->getManaCost(fireball, spellList));
+void Spellcaster::attack(Unit* enemy) {
+    enemy->takeDamage(this->getDamage() / 2);
+    enemy->counterAttack(this); 
 }
 
-void Spellcaster::castHeal(Unit* other, std::map<CAST_ENUM, int>* spellList) {
-    other->ensureIsAlive();
-    
-    this->spendManaPoints(this->getManaCost(heal, spellList));
+void Spellcaster::counterAttack(Unit* enemy) {
+    enemy->takeDamage(this->getDamage() / 2);
+}
+
+void Spellcaster::castFireball(Unit* enemy) {
+    this->spendManaPoints((this->getManaCost(fireball, this->spellList)));
+}
+
+void Spellcaster::castHeal(Unit* other) {
+    this->spendManaPoints(this->getManaCost(heal, this->spellList));
 }
 
 std::ostream& operator<<(std::ostream& out, const Spellcaster& spellcaster) {
-    out << spellcaster.getUnitState() << endl;
-    out << spellcaster.getSpellList();
+    out << spellcaster.getUnitState() << std::endl;
+    out << spellcaster.getSpellBook();
     
     return out;
 }

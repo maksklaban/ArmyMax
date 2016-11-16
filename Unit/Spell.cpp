@@ -1,41 +1,42 @@
 #include "Spell.h"
 
 Spell::Spell() {
-    this->spellList = new std::set<CAST_ENUM>();
-    this->currentSpell = CAST_ENUM(fireball);
-    this->spellList->insert(fireball);
-    this->spellList->insert(heal);
+    this->spellList = new std::map<CAST_ENUM, int>();
+    this->addSpell(fireball, 30);
+    this->addSpell(heal, 20);
 } 
 
 Spell::~Spell() {}
 
-const char* Spell::getCurrentSpell() const {
-    return SPELL_STRING[this->currentSpell];
+const std::map<CAST_ENUM, int>& Spell::getSpellList() const {
+    return *(this->spellList);
+}
+
+const int Spell::getManaCost(CAST_ENUM spell, std::map<CAST_ENUM, int>* spellList ) {
+    std::map<CAST_ENUM, int>::iterator it = spellList->find(spell);
+    
+    if ( it == spellList->end() ) {
+        throw SpellIsNotAvaibleException();
+    }
+    return it->second;
 }
 
 const void Spell::showSpellList() const {
-    std::set<CAST_ENUM>::iterator it;
+    std::map<CAST_ENUM, int>::iterator it;
     
     std::cout << "Current spellbook: ";
     
     for ( it = this->spellList->begin(); it != this->spellList->end(); it++ ) {
-        std::cout << SPELL_STRING[*it] << " ";
+        std::cout << std::endl << SPELL_STRING[it->first] << " - manacost(" << it->second << ");";
     }
-    
-    std::cout << std::endl;
 }
 
-void Spell::setSpell(CAST_ENUM spell) {
-    if ( this->spellList->count(spell) != 0 ) {
-        this->currentSpell = spell;
-    } else {
-        throw SpellIsNotAvaibleException();
-    }
+void Spell::addSpell(CAST_ENUM spell, int manaCost) {
+    this->spellList->insert(std::pair<CAST_ENUM, int>(spell, manaCost));
 }
 
 std::ostream& operator<<(std::ostream& out, const Spell& spell) {
     spell.showSpellList();
-    out << "Active spell: " << spell.getCurrentSpell();
     
     return out;
 }

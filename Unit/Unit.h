@@ -10,7 +10,7 @@ class Unit {
         State* state;
         std::string nickName;
     public:
-        Unit(int damage, int hitPoints, std::string nickName, std::string title="Default");
+        Unit(std::string nickName, int damage, int hitPoints, std::string title="Default");
         virtual ~Unit();
         
         const std::string& getNickName() const;

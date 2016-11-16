@@ -5,4 +5,8 @@
 
 class NoHitPointsException {};
 
+class SpellIsNotAvaibleException {};
+
+class NoManaPointsException {};
+
 #endif // EXCEPTION_H

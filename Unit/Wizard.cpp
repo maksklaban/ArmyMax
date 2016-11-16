@@ -2,16 +2,16 @@
 
 Wizard::Wizard(std::string nickName, int damage, int hitPoints, int manaPoints, std::string title) : Spellcaster(nickName, damage, hitPoints, manaPoints, title) {}
 
-Wizard::~Wizard();
+Wizard::~Wizard() {};
 
 void Wizard::castFireball(Unit* enemy) {
-    Unit::castFireball(enemy);
+    Spellcaster::castFireball(enemy);
     
-    enemy->takeDamage(this->damage);
+    enemy->takeDamage(this->getDamage());
 }
 
 void Wizard::castHeal(Unit* other) {
-    Unit::castHeal(enemy);
+    Spellcaster::castHeal(other);
     
-    other->addHitPoints(this->damage);
+    other->addHitPoints(this->getDamage());
 }
