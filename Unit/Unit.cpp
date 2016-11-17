@@ -30,7 +30,11 @@ const State& Unit::getState() const {
     return *(this->state);
 }
 
-void Unit::takeDamage(int dmg) {
+void Unit::takeMagDamage(int dmg) {
+    this->state->takeDamage(dmg);
+}
+
+void Unit::takePhysDamage(int dmg) {
     this->state->takeDamage(dmg);
 }
 
@@ -39,12 +43,12 @@ void Unit::addHitPoints(int hp) {
 }
 
 void Unit::attack(Unit* enemy) {
-    enemy->takeDamage(this->getDamage());
+    enemy->takePhysDamage(this->getDamage());
     enemy->counterAttack(this); 
 }
 
 void Unit::counterAttack(Unit* enemy) {
-    enemy->takeDamage(this->getDamage() / 2);
+    enemy->takePhysDamage(this->getDamage() / 2);
 }
 
 std::ostream& operator<<(std::ostream& out, const Unit& unit) {

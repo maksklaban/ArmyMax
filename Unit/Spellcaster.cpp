@@ -1,6 +1,6 @@
 #include "Spellcaster.h"
 
-Spellcaster::Spellcaster(std::string nickName, int damage, int hitPoints, int manaPoints, std::string title) : Unit(nickName, damage, hitPoints, title), Spell(), manaPoints(manaPoints), manaPointsLimit(manaPoints) {}
+Spellcaster::Spellcaster(std::string nickName, int damage, int hitPoints, int manaPoints, std::string title) : Unit(nickName, (damage / 2), hitPoints, title), Spell(), manaPoints(manaPoints), manaPointsLimit(manaPoints), magDamage(damage) {}
 
 Spellcaster::~Spellcaster() {}
 
@@ -10,6 +10,10 @@ const int Spellcaster::getManaPoints() const {
 
 const int Spellcaster::getManaPointsLimit() const {
     return this->manaPointsLimit;
+}
+
+const int Spellcaster::getMagDamage() const {
+    return this->magDamage;
 }
 
 const Unit& Spellcaster::getUnitState() const {
@@ -50,12 +54,12 @@ void Spellcaster::spendManaPoints(int mp) {
 }
 
 void Spellcaster::attack(Unit* enemy) {
-    enemy->takeDamage(this->getDamage() / 2);
+    enemy->takePhysDamage(this->getDamage());
     enemy->counterAttack(this); 
 }
 
 void Spellcaster::counterAttack(Unit* enemy) {
-    enemy->takeDamage(this->getDamage() / 2);
+    enemy->takePhysDamage(this->getDamage() / 2);
 }
 
 void Spellcaster::castFireball(Unit* enemy) {
@@ -67,7 +71,7 @@ void Spellcaster::castHeal(Unit* other) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Spellcaster& spellcaster) {
-    out << spellcaster.getUnitState() << std::endl;
+    out << spellcaster.getUnitState() << " " << spellcaster.getMagDamage() << std::endl;
     out << spellcaster.getSpellBook();
     
     return out;

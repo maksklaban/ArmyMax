@@ -20,7 +20,8 @@ class Unit {
         const std::string& getTitle() const;
         const State& getState() const;
         
-        void takeDamage(int dmg);
+        virtual void takeMagDamage(int dmg);
+        void takePhysDamage(int dmg);
         void addHitPoints(int hp);
         
         virtual void attack(Unit* enemy) = 0;

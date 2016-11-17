@@ -11,6 +11,7 @@ class Spellcaster : public Unit, public Spell {
         Spell* spellBook;
         int manaPoints;
         int manaPointsLimit;
+        int magDamage;
         
         void ensureIsAlive();
     public:
@@ -19,6 +20,7 @@ class Spellcaster : public Unit, public Spell {
         
         const int getManaPoints() const;
         const int getManaPointsLimit() const;
+        const int getMagDamage() const;
         const Unit& getUnitState() const;
         const Spell& getSpellBook() const;
         

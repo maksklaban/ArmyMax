@@ -7,7 +7,7 @@ Wizard::~Wizard() {};
 void Wizard::castFireball(Unit* enemy) {
     Spellcaster::castFireball(enemy);
     
-    enemy->takeDamage(this->getDamage());
+    enemy->takeMagDamage(this->getDamage());
 }
 
 void Wizard::castHeal(Unit* other) {
