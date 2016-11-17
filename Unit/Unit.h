@@ -9,6 +9,7 @@ class Unit {
     protected:
         State* state;
         std::string nickName;
+        
     public:
         Unit(std::string nickName, int damage, int hitPoints, std::string title="Default");
         virtual ~Unit();
@@ -24,7 +25,7 @@ class Unit {
         void takePhysDamage(int dmg);
         void addHitPoints(int hp);
         
-        virtual void attack(Unit* enemy) = 0;
+        virtual void attack(Unit* enemy);
         virtual void counterAttack(Unit* enemy);
 };
 

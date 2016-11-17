@@ -1,7 +1,6 @@
 #ifndef WIZARD_H
 #define WIZARD_H
 
-#include <iostream>
 #include "Spellcaster.h"
 
 class Wizard : public Spellcaster {

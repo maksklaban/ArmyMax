@@ -16,14 +16,6 @@ const int Spellcaster::getMagDamage() const {
     return this->magDamage;
 }
 
-const Unit& Spellcaster::getUnitState() const {
-    return *(this->unit);
-}
-
-const Spell& Spellcaster::getSpellBook() const {
-    return *(this->spellBook);
-}
-
 void Spellcaster::ensureIsAlive() {
     if ( Unit::getHitPoints() == 0 ) {
         throw NoHitPointsException();
@@ -71,8 +63,9 @@ void Spellcaster::castHeal(Unit* other) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Spellcaster& spellcaster) {
-    out << spellcaster.getUnitState() << " " << spellcaster.getMagDamage() << std::endl;
-    out << spellcaster.getSpellBook();
+    out << (Unit)spellcaster << ", Magic damage " << spellcaster.getMagDamage() <<", " << "ManaPoints " << spellcaster.getManaPoints() << "/" << spellcaster.getManaPointsLimit() << std::endl;
+    out << (Spell)spellcaster;
+    
     
     return out;
 }
