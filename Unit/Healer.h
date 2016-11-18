@@ -9,7 +9,8 @@ class Healer : public Spellcaster {
         virtual ~Healer();
         
         virtual void castFireball(Unit* enemy);
-        virtual void castHeal(Unit* enemy);
+        virtual void castHeal(Unit* other);
+        virtual void castManaRestore(Spellcaster* other);
 };
 
 

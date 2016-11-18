@@ -9,7 +9,7 @@ class Wizard : public Spellcaster {
         virtual ~Wizard();
         
         virtual void castFireball(Unit* enemy);
-        virtual void castHeal(Unit* enemy);
+        virtual void castHeal(Unit* other);
 };
 
 #endif //WIZARD_H

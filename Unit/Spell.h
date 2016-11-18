@@ -3,6 +3,7 @@
 #define FOREACH_SPELL(SPELL) \
               SPELL(fireball) \
               SPELL(heal) \
+              SPELL(manaRestore) \
               SPELL(summonDemon) \
 
 #define GENERATE_ENUM(ENUM) ENUM,
@@ -24,11 +25,11 @@ class Spell {
     protected:
         std::map<CAST_ENUM, int>* spellList;
         
-        void addSpell(CAST_ENUM spell, int manaCost); 
     public:
         Spell();
         virtual ~Spell();
         
+        void addSpell(CAST_ENUM spell, int manaCost); 
         const std::map<CAST_ENUM, int>& getSpellList() const; 
         const int getManaCost(CAST_ENUM spell, std::map<CAST_ENUM, int>* spellList );
         const void showSpellList() const;
