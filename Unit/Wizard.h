@@ -5,11 +5,10 @@
 
 class Wizard : public Spellcaster {
     public:
-        Wizard(std::string nickName, int damage=35, int hitPoints=150, int manaPoints=100, std::string title="Wizard");
+        Wizard(std::string nickName, int damage=15, int hitPoints=150, int manaPoints=100, std::string title="Wizard");
         virtual ~Wizard();
         
-        virtual void castFireball(Unit* enemy);
-        virtual void castHeal(Unit* other);
+        virtual void castSpell(Unit* other, CAST_ENUM spell);
 };
 
 #endif //WIZARD_H

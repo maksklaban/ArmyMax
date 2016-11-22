@@ -4,14 +4,14 @@ Wizard::Wizard(std::string nickName, int damage, int hitPoints, int manaPoints, 
 
 Wizard::~Wizard() {};
 
-void Wizard::castFireball(Unit* enemy) {
-    Spellcaster::castFireball(enemy);
-    
-    enemy->takeMagDamage(this->getMagDamage());
-}
+void Wizard::castSpell(Unit* other, CAST_ENUM spell) {
+    Spellcaster::castSpell(other, spell);
 
-void Wizard::castHeal(Unit* other) {
-    Spellcaster::castHeal(other);
-    
-    other->addHitPoints(this->getMagDamage() / 2);
+    std::map<CAST_ENUM, Spell>::iterator it = this->spellBook->find(spell);
+
+    if ( it->second.getIsBattle() ) {
+        other->takeMagDamage(it->second.getActionPoints());
+    } else {
+        other->addHitPoints((it->second.getActionPoints()) / 2);
+    }
 }

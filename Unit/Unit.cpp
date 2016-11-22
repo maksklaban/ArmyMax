@@ -52,7 +52,7 @@ void Unit::counterAttack(Unit* enemy) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Unit& unit) {
-    out << unit.getNickName() << " " << unit.getState();
+    out << unit.getNickName() << unit.getState();
     
     return out;
 }

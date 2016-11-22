@@ -1,42 +1,27 @@
 #include "Spell.h"
 
-Spell::Spell() {
-    this->spellList = new std::map<CAST_ENUM, int>();
-    this->addSpell(fireball, 30);
-    this->addSpell(heal, 20);
-} 
+Spell::Spell(CAST_ENUM spellName, int actionPoints, int manaCost, bool isBattle) : spellName(spellName), actionPoints(actionPoints), manaCost(manaCost), isBattle(isBattle) {}
 
-Spell::~Spell() {}
+Spell::~Spell() {} 
 
-const std::map<CAST_ENUM, int>& Spell::getSpellList() const {
-    return *(this->spellList);
+const CAST_ENUM Spell::getSpellName() const {
+    return this->spellName;
 }
 
-const int Spell::getManaCost(CAST_ENUM spell, std::map<CAST_ENUM, int>* spellList ) {
-    std::map<CAST_ENUM, int>::iterator it = spellList->find(spell);
-    
-    if ( it == spellList->end() ) {
-        throw SpellIsNotAvaibleException();
-    }
-    return it->second;
+const int Spell::getManaCost() const {
+    return this->manaCost;
 }
 
-const void Spell::showSpellList() const {
-    std::map<CAST_ENUM, int>::iterator it;
-    
-    std::cout << "Current spellbook: ";
-    
-    for ( it = this->spellList->begin(); it != this->spellList->end(); it++ ) {
-        std::cout << std::endl << SPELL_STRING[it->first] << " - manacost(" << it->second << ");";
-    }
+const int Spell::getActionPoints() const {
+    return this->actionPoints;
 }
 
-void Spell::addSpell(CAST_ENUM spell, int manaCost) {
-    this->spellList->insert(std::pair<CAST_ENUM, int>(spell, manaCost));
+const bool Spell::getIsBattle() const {
+    return this->isBattle;
 }
 
 std::ostream& operator<<(std::ostream& out, const Spell& spell) {
-    spell.showSpellList();
+    out << SPELL_STRING[spell.getSpellName()] << ": Spellpower - " << spell.getActionPoints() << ", Manacost - " << spell.getManaCost();
     
     return out;
 }

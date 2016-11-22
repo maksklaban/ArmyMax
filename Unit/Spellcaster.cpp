@@ -1,6 +1,10 @@
 #include "Spellcaster.h"
 
-Spellcaster::Spellcaster(std::string nickName, int damage, int hitPoints, int manaPoints, std::string title) : Unit(nickName, (damage / 2), hitPoints, title), Spell(), manaPoints(manaPoints), manaPointsLimit(manaPoints), magDamage(damage) {}
+Spellcaster::Spellcaster(std::string nickName, int damage, int hitPoints, int manaPoints, std::string title) : Unit(nickName, damage, hitPoints, title), manaPoints(manaPoints), manaPointsLimit(manaPoints) {
+    this->spellBook = new std::map<CAST_ENUM, Spell>();
+    this->spellBook->insert(std::pair<CAST_ENUM, Spell>(Fireball, Spell(Fireball, 40, 30, true)));
+    this->spellBook->insert(std::pair<CAST_ENUM, Spell>(Heal, Spell(Heal, 45, 35, false)));
+}
 
 Spellcaster::~Spellcaster() {}
 
@@ -12,13 +16,23 @@ const int Spellcaster::getManaPointsLimit() const {
     return this->manaPointsLimit;
 }
 
-const int Spellcaster::getMagDamage() const {
-    return this->magDamage;
+const std::map<CAST_ENUM, Spell>& Spellcaster::getSpellBook() const {
+    return *(this->spellBook);
 }
 
 void Spellcaster::ensureIsAlive() {
     if ( Unit::getHitPoints() == 0 ) {
         throw NoHitPointsException();
+    }
+}
+
+const void Spellcaster::showSpellBook() const {
+    std::map<CAST_ENUM, Spell>::iterator it;
+    
+    std::cout << "Current spellbook: ";
+    
+    for ( it = this->spellBook->begin(); it != this->spellBook->end(); it++ ) {
+        std::cout << std::endl << it->second;
     }
 }
 
@@ -54,18 +68,20 @@ void Spellcaster::counterAttack(Unit* enemy) {
     enemy->takePhysDamage(this->getDamage() / 2);
 }
 
-void Spellcaster::castFireball(Unit* enemy) {
-    this->spendManaPoints((this->getManaCost(fireball, this->spellList)));
-}
+void Spellcaster::castSpell(Unit* other, CAST_ENUM spell) {
+    std::map<CAST_ENUM, Spell>::iterator it = this->spellBook->find(spell);
 
-void Spellcaster::castHeal(Unit* other) {
-    this->spendManaPoints(this->getManaCost(heal, this->spellList));
+    if ( it == spellBook->end() ) {
+        throw SpellIsNotAvaibleException();
+    }
+
+    this->spendManaPoints(it->second.Spell::getManaCost());
+
 }
 
 std::ostream& operator<<(std::ostream& out, const Spellcaster& spellcaster) {
-    out << (Unit)spellcaster << ", Magic damage " << spellcaster.getMagDamage() <<", " << "ManaPoints " << spellcaster.getManaPoints() << "/" << spellcaster.getManaPointsLimit() << std::endl;
-    out << (Spell)spellcaster;
-    
+    out << (Unit)spellcaster << ", ManaPoints " << spellcaster.getManaPoints() << "/" << spellcaster.getManaPointsLimit() << ";" << std::endl;
+    spellcaster.showSpellBook();
     
     return out;
 }

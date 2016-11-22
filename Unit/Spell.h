@@ -1,15 +1,12 @@
 #ifndef SPELL_H
 #define SPELL_H
 #define FOREACH_SPELL(SPELL) \
-              SPELL(fireball) \
-              SPELL(heal) \
-              SPELL(manaRestore) \
-              SPELL(summonDemon) \
+              SPELL(Fireball) \
+              SPELL(Heal) \
 
 #define GENERATE_ENUM(ENUM) ENUM,
 #define GENERATE_STRING(STRING) #STRING,
 
-#include <map>
 #include <iostream>
 #include "../exception.h"
 
@@ -23,16 +20,19 @@ static const std::string SPELL_STRING[] = {
 
 class Spell {
     protected:
-        std::map<CAST_ENUM, int>* spellList;
+        CAST_ENUM spellName;
+        int actionPoints;
+        int manaCost;
+        bool isBattle;
         
     public:
-        Spell();
+        Spell(CAST_ENUM spellName, int actionPoints, int manaCost, bool isBattle);
         virtual ~Spell();
         
-        void addSpell(CAST_ENUM spell, int manaCost); 
-        const std::map<CAST_ENUM, int>& getSpellList() const; 
-        const int getManaCost(CAST_ENUM spell, std::map<CAST_ENUM, int>* spellList );
-        const void showSpellList() const;
+        const CAST_ENUM getSpellName() const;
+        const int getManaCost() const;
+        const int getActionPoints() const;
+        const bool getIsBattle() const;
 };
 
 std::ostream& operator<<(std::ostream& out, const Spell& spell);
