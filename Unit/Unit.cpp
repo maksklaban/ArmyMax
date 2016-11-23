@@ -1,6 +1,6 @@
 #include "Unit.h"
 
-Unit::Unit(std::string nickName, int damage, int hitPoints, std::string title, bool isVampire, bool isWerewolf) : nickName(nickName), state(new State(hitPoints, damage, title)), ability(new Ability(isVampire, isWerewolf)) {}
+Unit::Unit(std::string nickName, int damage, int hitPoints, std::string title, bool isUndead, bool isVampire, bool isWerewolf) : nickName(nickName), isUndead(isUndead), state(new State(hitPoints, damage, title)), ability(new Ability(isVampire, isWerewolf)) {}
 
 Unit::~Unit() {
     delete state;
@@ -20,6 +20,10 @@ const int Unit::getHitPoints() const {
 
 const int Unit::getHitPointsLimit() const {
     return this->state->getHitPointsLimit();
+}
+
+const bool Unit::getIsUndead() const {
+    return this->isUndead;
 }
 
 const std::string& Unit::getTitle() const {

@@ -11,15 +11,17 @@ class Unit : public Ability{
         State* state;
         Ability* ability;
         std::string nickName;
+        bool isUndead;
         
     public:
-        Unit(std::string nickName, int damage, int hitPoints, std::string title="Default", bool isVampire=false, bool isWerewolf=false);
+        Unit(std::string nickName, int damage, int hitPoints, std::string title="Default", bool isUndead=false, bool isVampire=false, bool isWerewolf=false);
         virtual ~Unit();
         
         const std::string& getNickName() const;
         const int getDamage() const;
         const int getHitPoints() const;
         const int getHitPointsLimit() const;
+        const bool getIsUndead() const;
         const std::string& getTitle() const;
         const State& getState() const;
         const Ability& getAbility() const;

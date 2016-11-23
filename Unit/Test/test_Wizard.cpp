@@ -23,6 +23,7 @@ TEST_CASE("test Wizard class", "[Wizard]") {
     REQUIRE(f2->getHitPoints() == 117);
     REQUIRE(f1->getHitPoints() == 143);
     REQUIRE(f1->getIsVampire() == false);
+    REQUIRE(f2->getIsUndead() == false);
     // f1->getUnitState();
     // f1->getSpellBook();
     
