@@ -1,6 +1,6 @@
 #include "Unit.h"
 
-Unit::Unit(std::string nickName, int damage, int hitPoints, std::string title) : nickName(nickName), state(new State(hitPoints, damage, title)) {}
+Unit::Unit(std::string nickName, int damage, int hitPoints, std::string title, bool isVampire, bool isWerewolf) : nickName(nickName), state(new State(hitPoints, damage, title)), ability(new Ability(isVampire, isWerewolf)) {}
 
 Unit::~Unit() {
     delete state;
@@ -30,11 +30,15 @@ const State& Unit::getState() const {
     return *(this->state);
 }
 
-void Unit::takeMagDamage(int dmg) {
-    this->state->takeDamage(dmg);
+const Ability& Unit::getAbility() const {
+    return *(this->ability);
 }
 
-void Unit::takePhysDamage(int dmg) {
+void Unit::takeMagDamage(int dmg) {
+    this->state->takeMagDamage(dmg);
+}
+
+void Unit::takePhysicalDamage(int dmg) {
     this->state->takeDamage(dmg);
 }
 
@@ -43,16 +47,16 @@ void Unit::addHitPoints(int hp) {
 }
 
 void Unit::attack(Unit* enemy) {
-    enemy->takePhysDamage(this->getDamage());
+    enemy->takePhysicalDamage(this->getDamage());
     enemy->counterAttack(this); 
 }
 
 void Unit::counterAttack(Unit* enemy) {
-    enemy->takePhysDamage(this->getDamage() / 2);
+    enemy->takePhysicalDamage(this->getDamage() / 2);
 }
 
 std::ostream& operator<<(std::ostream& out, const Unit& unit) {
-    out << unit.getNickName() << unit.getState();
+    out << unit.getNickName() << (Ability)unit << unit.getState();
     
     return out;
 }

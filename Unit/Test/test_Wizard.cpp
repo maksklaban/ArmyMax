@@ -10,11 +10,11 @@ TEST_CASE("test Wizard class", "[Wizard]") {
     REQUIRE(f1->getDamage() == 15 );
     REQUIRE(f1->getHitPoints() == 150);
     
-    f1->castSpell(f2, fireball);
+    f1->castSpell(f2, Fireball);
     
     REQUIRE(f2->getHitPoints() == 110);
     
-    f1->castSpell(f2, heal);
+    f1->castSpell(f2, Heal);
     
     REQUIRE(f2->getHitPoints() == 132);
     
@@ -22,7 +22,7 @@ TEST_CASE("test Wizard class", "[Wizard]") {
     
     REQUIRE(f2->getHitPoints() == 117);
     REQUIRE(f1->getHitPoints() == 143);
-    
+    REQUIRE(f1->getIsVampire() == false);
     // f1->getUnitState();
     // f1->getSpellBook();
     

@@ -24,6 +24,7 @@ class State {
         
         void addHitPoints(int hp);
         void takeDamage(int dmg);
+        void takeMagDamage(int dmg);
 };
 
 std::ostream& operator<<(std::ostream& out, const State& state);

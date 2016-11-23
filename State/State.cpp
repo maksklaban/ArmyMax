@@ -50,6 +50,10 @@ void State::takeDamage(int dmg) {
     this->hitPoints -= dmg;
 }
 
+void State::takeMagDamage(int dmg) {
+    this->takeDamage(dmg);
+}
+
 std::ostream& operator<<(std::ostream& out, const  State& state) {
     out << " - " << state.getTitle() << ", ";
     out << "HP " << state.getHitPoints() << "/" << state.getHitPointsLimit() << ", ";

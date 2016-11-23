@@ -9,4 +9,6 @@ class SpellIsNotAvaibleException {};
 
 class NoManaPointsException {};
 
+class CantTurnThisUnitException {};
+
 #endif // EXCEPTION_H

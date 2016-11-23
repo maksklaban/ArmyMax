@@ -60,12 +60,12 @@ void Spellcaster::spendManaPoints(int mp) {
 }
 
 void Spellcaster::attack(Unit* enemy) {
-    enemy->takePhysDamage(this->getDamage());
+    enemy->takePhysicalDamage(this->getDamage());
     enemy->counterAttack(this); 
 }
 
 void Spellcaster::counterAttack(Unit* enemy) {
-    enemy->takePhysDamage(this->getDamage() / 2);
+    enemy->takePhysicalDamage(this->getDamage() / 2);
 }
 
 void Spellcaster::castSpell(Unit* other, CAST_ENUM spell) {
