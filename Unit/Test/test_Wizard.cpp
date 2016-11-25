@@ -2,6 +2,7 @@
 #include "../Soldier.h"
 #include "../Rogue.h"
 #include "../Berserk.h"
+#include "../Vampire.h"
 #include "catch.hpp"
 #include <iostream>
 
@@ -11,11 +12,36 @@ TEST_CASE("test Wizard class", "[Wizard]") {
     Wizard* f2 = new Wizard("TvoyaMamka");
     Soldier* f3 = new Soldier("VASYA");
     Soldier* f4 = new Soldier("PETYA");
+    Soldier* test = new Soldier("m9so");
+    Soldier* test1 = new Soldier("m9sko");
     Rogue* f5 = new Rogue("KATYA");
     Rogue* f6 = new Rogue("voRishKA");
     Berserk* f7 = new Berserk("BEZUMEC");
     Berserk* f8 = new Berserk("NEUDERZHIMIY");
+    Vampire* f9 = new Vampire("VLAD");
+    Vampire* f10 = new Vampire("ConstantinVladimirovich");
 
+    SECTION("Vampire test") {
+        REQUIRE(f9->getDamage() == 30);
+        REQUIRE(f10->getHitPoints() == 180);
+
+        f9->attack(f10);
+
+        REQUIRE(f10->getHitPoints() == 155);
+        REQUIRE(f9->getHitPoints() == 165);
+
+
+        f9->turnInVampire(test);
+        test->turnInVampire(test1);
+
+        REQUIRE(test->getIsVampire() == true);
+        REQUIRE(test->getIsUndead() == true);
+        REQUIRE(test1->getIsUndead() == true);
+
+        test->vampireAttack(test1);
+        test1->vampireAttack(test);
+        REQUIRE(test1->getHitPoints() == 165);
+    }
 
     SECTION("Berserk test") {
         REQUIRE(f7->getDamage() == 25);

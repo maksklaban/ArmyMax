@@ -13,7 +13,7 @@ const bool Ability::getIsVampire() const {
 }
 
 void Ability::turnInVampire(Ability* enemy) {
-    if ( !(enemy->isVampire) && !(enemy->isWerewolf )) {
+    if ( !(enemy->isVampire) && !(enemy->isWerewolf) && this->isVampire ) {
         enemy->isVampire = true;
     } else {
         throw CantTurnThisUnitException();
@@ -21,7 +21,7 @@ void Ability::turnInVampire(Ability* enemy) {
 }
 
 void Ability::turnInWerewolf(Ability* enemy) {
-    if ( !(enemy->isVampire) && !(enemy->isWerewolf )) {
+    if ( !(enemy->isVampire) && !(enemy->isWerewolf) && this->isVampire ) {
         enemy->isWerewolf = true;
     } else {
         throw CantTurnThisUnitException();
@@ -30,11 +30,11 @@ void Ability::turnInWerewolf(Ability* enemy) {
 
 std::ostream& operator<<(std::ostream& out, const Ability& ability) {
     if ( ability.getIsVampire() ) {
-        out << "Unit is vampire" << std::endl;
+        out << "(Unit has a vampire abilties)";
     } 
 
     if (ability.getIsWerewolf() ) {
-        out << "Unit is werewolf" << std::endl;
+        out << "(Unit has a werewolf abilties)";
     }
 
     return out;

@@ -57,6 +57,12 @@ void Unit::addHitPoints(int hp) {
     this->state->addHitPoints(hp);
 }
 
+void Unit::turnInVampire(Unit* enemy) {
+    Ability::turnInVampire(enemy);
+
+    enemy->isUndead = true;
+}
+
 void Unit::transformInToWolf() {
     if ( this->isWerewolf ) {
         this->state = this->wolfState;
@@ -73,6 +79,15 @@ void Unit::transformBack() {
     }
 }
 
+void Unit::vampireAttack(Unit* enemy) {
+    if ( this->getIsVampire() ) {
+        this->attack(enemy);
+        this->addHitPoints(this->getDamage() / 3);
+    } else {
+        throw AbilityIsNotAvaibleException();
+    }
+}
+
 void Unit::attack(Unit* enemy) {
     enemy->takePhysicalDamage(this->getDamage());
     enemy->counterAttack(this); 
@@ -83,7 +98,7 @@ void Unit::counterAttack(Unit* enemy) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Unit& unit) {
-    out << unit.getNickName() << (Ability)unit << unit.getState();
+    out << unit.getNickName() << " " << (Ability)unit << unit.getState();
     
     return out;
 }

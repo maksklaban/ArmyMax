@@ -13,4 +13,6 @@ class CantTurnThisUnitException {};
 
 class UnitCantTransformException {};
 
+class AbilityIsNotAvaibleException {};
+
 #endif // EXCEPTION_H

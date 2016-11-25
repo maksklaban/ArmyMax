@@ -35,6 +35,8 @@ class Unit : public Ability, public Observer, public Subject {
         
         void transformInToWolf();
         void transformBack();
+        void vampireAttack(Unit* enemy);
+        virtual void turnInVampire(Unit* enemy);
         virtual void attack(Unit* enemy);
         virtual void counterAttack(Unit* enemy);
 };
