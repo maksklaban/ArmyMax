@@ -11,5 +11,4 @@ class Soldier : public Unit {
         virtual void attack(Unit* enemy);
 };
 
-
 #endif // SOLDIER_H
