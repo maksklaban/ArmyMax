@@ -80,7 +80,7 @@ void Spellcaster::castSpell(Unit* other, CAST_ENUM spell) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Spellcaster& spellcaster) {
-    out << (Unit)spellcaster << ", ManaPoints " << spellcaster.getManaPoints() << "/" << spellcaster.getManaPointsLimit() << ";" << std::endl;
+    out << (Unit)spellcaster << ", ManaPoints " << spellcaster.getManaPoints() << "/" << spellcaster.getManaPointsLimit() << std::endl;
     spellcaster.showSpellBook();
     
     return out;

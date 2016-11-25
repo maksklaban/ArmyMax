@@ -21,7 +21,7 @@ const bool Spell::getIsBattle() const {
 }
 
 std::ostream& operator<<(std::ostream& out, const Spell& spell) {
-    out << SPELL_STRING[spell.getSpellName()] << ": Spellpower - " << spell.getActionPoints() << ", Manacost - " << spell.getManaCost();
+    out << SPELL_STRING[spell.getSpellName()] << ": Spellpower - " << spell.getActionPoints() << ", Manacost - " << spell.getManaCost() << ";";
     
     return out;
 }

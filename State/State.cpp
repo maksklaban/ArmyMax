@@ -64,7 +64,7 @@ void State::takeDamage(int dmg) {
 std::ostream& operator<<(std::ostream& out, const  State& state) {
     out << " - " << state.getTitle() << ", ";
     out << "HP " << state.getHitPoints() << "/" << state.getHitPointsLimit() << ", ";
-    out << "Damage "<<state.getDamage() << ", ";
+    out << "Damage "<<state.getDamage();
     if ( state.getIsWolf() ) {
         out << "Unit in wolf form";
     }
