@@ -2,14 +2,25 @@
 
 State::State(int hitPoints, int damage, std::string title, bool isWolf) : hitPoints(hitPoints), hitPointsLimit(hitPoints), damage(damage), title(title), isWolf(isWolf) {}
 
-State::State(const State& other) {
-    ensureIsAlive();
+// State::State(const State& other) {
+//     ensureIsAlive();
     
-    this->hitPointsLimit = other.hitPointsLimit;
-    this->damage = other.damage;
-    this->title = other.title;
-    this->isWolf = other.isWolf;
-}
+//     this->hitPointsLimit = other.hitPointsLimit;
+//     this->damage = other.damage;
+//     this->title = other.title;
+//     this->isWolf = other.isWolf;
+// }
+
+// State& State::operator=(const State& other) {
+//     ensureIsAlive();
+
+//     this->hitPointsLimit = other.hitPointsLimit;
+//     this->damage = other.damage;
+//     this->title = other.title;
+//     this->isWolf = isWolf;
+
+//     return *this;
+// }
 
 State::~State() {}
 
@@ -65,9 +76,6 @@ std::ostream& operator<<(std::ostream& out, const  State& state) {
     out << " - " << state.getTitle() << ", ";
     out << "HP " << state.getHitPoints() << "/" << state.getHitPointsLimit() << ", ";
     out << "Damage "<<state.getDamage();
-    if ( state.getIsWolf() ) {
-        out << "Unit in wolf form";
-    }
-    
+
     return out;
 }

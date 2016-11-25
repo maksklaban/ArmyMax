@@ -1,8 +1,8 @@
 #include "Unit.h"
 
 Unit::Unit(std::string nickName, int damage, int hitPoints, std::string title, bool isUndead, bool isVampire, bool isWerewolf) : nickName(nickName), isUndead(isUndead), state(new State(hitPoints, damage, title, false)), Ability(isVampire, isWerewolf), Subject() {
-    this->normalState = this->state;
-    this->wolfState = new State(hitPoints, (damage * 2), "WolfForm", true);
+    this->normalState = new State(hitPoints, damage, title, false);
+    this->wolfState = new State((hitPoints * 1.5), (damage * 2), "WolfForm", true);
 }
 
 Unit::~Unit() {

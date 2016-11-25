@@ -33,8 +33,8 @@ class Unit : public Ability, public Observer, public Subject {
         void takePhysicalDamage(int dmg);
         virtual void addHitPoints(int hp);
         
-        void transformInToWolf();
-        void transformBack();
+        virtual void transformInToWolf();
+        virtual void transformBack();
         void vampireAttack(Unit* enemy);
         virtual void turnInVampire(Unit* enemy);
         virtual void attack(Unit* enemy);

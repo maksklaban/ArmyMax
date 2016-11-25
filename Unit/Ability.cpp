@@ -21,7 +21,7 @@ void Ability::turnInVampire(Ability* enemy) {
 }
 
 void Ability::turnInWerewolf(Ability* enemy) {
-    if ( !(enemy->isVampire) && !(enemy->isWerewolf) && this->isVampire ) {
+    if ( !(enemy->isVampire) && !(enemy->isWerewolf) && this->isWerewolf ) {
         enemy->isWerewolf = true;
     } else {
         throw CantTurnThisUnitException();

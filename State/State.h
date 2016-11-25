@@ -16,7 +16,8 @@ class State {
     
     public:
         State(int hitPoints, int damage, std::string title, bool isWolf=false);
-        State(const State& other);
+        // State(const State& other);
+        // State& operator=(const State& other);
         virtual ~State();
         
         const int getHitPoints() const;

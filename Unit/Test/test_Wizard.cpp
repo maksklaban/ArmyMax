@@ -3,11 +3,13 @@
 #include "../Rogue.h"
 #include "../Berserk.h"
 #include "../Vampire.h"
+#include "../Werewolf.h"
 #include "catch.hpp"
 #include <iostream>
 
 TEST_CASE("test Wizard class", "[Wizard]") {
     Wizard* f1 = new Wizard("Nagibator");
+    Wizard* test2 = new Wizard("test");
     // Wizard* f2 = new Wizard("TvoyaMamka");
     Wizard* f2 = new Wizard("TvoyaMamka");
     Soldier* f3 = new Soldier("VASYA");
@@ -20,6 +22,8 @@ TEST_CASE("test Wizard class", "[Wizard]") {
     Berserk* f8 = new Berserk("NEUDERZHIMIY");
     Vampire* f9 = new Vampire("VLAD");
     Vampire* f10 = new Vampire("ConstantinVladimirovich");
+    Werewolf* f11 = new Werewolf("SobakaUlubaka");
+    Werewolf* f12 = new Werewolf("Barbos");
 
     SECTION("Vampire test") {
         REQUIRE(f9->getDamage() == 30);
@@ -40,8 +44,45 @@ TEST_CASE("test Wizard class", "[Wizard]") {
 
         test->vampireAttack(test1);
         test1->vampireAttack(test);
+
         REQUIRE(test1->getHitPoints() == 165);
     }
+
+    SECTION("Werewolf test") {
+        REQUIRE(f11->getDamage() == 25);
+        REQUIRE(f12->getHitPoints() == 200);
+
+        f11->attack(f12);
+
+        REQUIRE(f12->getHitPoints() == 175);
+        REQUIRE(f11->getHitPoints() == 188);
+        REQUIRE(f11->getIsWolf() == false);
+        
+        f11->transformInToWolf();
+
+        test2->castSpell(f11, Fireball);
+        
+        REQUIRE(f11->getDamage() == 50);
+        REQUIRE(f11->getIsWolf() == true);
+        REQUIRE(f11->getHitPoints() == 220);
+        REQUIRE(f11->getHitPointsLimit() == 300);
+
+        f11->transformBack();
+        
+        REQUIRE(f11->getIsWolf() == false);
+        REQUIRE(f11->getDamage() == 25);
+        REQUIRE(f11->getHitPointsLimit() == 200);
+        REQUIRE(f11->getHitPoints() == 200);
+        
+        test2->castSpell(f11, Fireball);
+
+        REQUIRE(f11->getHitPoints() == 160);
+
+        f11->turnInWerewolf(test2);
+
+        REQUIRE(test2->getIsWerewolf() == true);
+    }
+
 
     SECTION("Berserk test") {
         REQUIRE(f7->getDamage() == 25);
