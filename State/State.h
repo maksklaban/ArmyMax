@@ -10,21 +10,23 @@ class State {
         int hitPointsLimit;
         int damage;
         std::string title;
+        bool isWolf;
         
         void ensureIsAlive();
     
     public:
-        State(int hitPoints, int damage, std::string title);
+        State(int hitPoints, int damage, std::string title, bool isWolf=false);
+        State(const State& other);
         virtual ~State();
         
         const int getHitPoints() const;
         const int getHitPointsLimit() const;
         const int getDamage() const;
         const std::string& getTitle() const;
-        
+        const bool getIsWolf() const;
+
         void addHitPoints(int hp);
         void takeDamage(int dmg);
-        void takeMagDamage(int dmg);
 };
 
 std::ostream& operator<<(std::ostream& out, const State& state);

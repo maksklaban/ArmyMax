@@ -13,7 +13,7 @@ const bool Ability::getIsVampire() const {
 }
 
 void Ability::turnInVampire(Ability* enemy) {
-    if ( !(enemy->isVampire && !(enemy->isWerewolf ))) {
+    if ( !(enemy->isVampire) && !(enemy->isWerewolf )) {
         enemy->isVampire = true;
     } else {
         throw CantTurnThisUnitException();
@@ -21,7 +21,7 @@ void Ability::turnInVampire(Ability* enemy) {
 }
 
 void Ability::turnInWerewolf(Ability* enemy) {
-    if ( !(enemy->isVampire && !(enemy->isWerewolf ))) {
+    if ( !(enemy->isVampire) && !(enemy->isWerewolf )) {
         enemy->isWerewolf = true;
     } else {
         throw CantTurnThisUnitException();

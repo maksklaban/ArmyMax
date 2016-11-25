@@ -1,7 +1,14 @@
 #include "State.h"
 
-State::State(int hitPoints, int damage, std::string title) : hitPoints(hitPoints), hitPointsLimit(hitPoints), damage(damage), title(title) {
+State::State(int hitPoints, int damage, std::string title, bool isWolf) : hitPoints(hitPoints), hitPointsLimit(hitPoints), damage(damage), title(title), isWolf(isWolf) {}
+
+State::State(const State& other) {
     ensureIsAlive();
+    
+    this->hitPointsLimit = other.hitPointsLimit;
+    this->damage = other.damage;
+    this->title = other.title;
+    this->isWolf = other.isWolf;
 }
 
 State::~State() {}
@@ -20,6 +27,10 @@ const int State::getHitPointsLimit() const {
 
 const std::string& State::getTitle() const {
     return this->title;
+}
+
+const bool State::getIsWolf() const {
+    return this->isWolf;
 }
 
 void State::ensureIsAlive() {
@@ -50,14 +61,13 @@ void State::takeDamage(int dmg) {
     this->hitPoints -= dmg;
 }
 
-void State::takeMagDamage(int dmg) {
-    this->takeDamage(dmg);
-}
-
 std::ostream& operator<<(std::ostream& out, const  State& state) {
     out << " - " << state.getTitle() << ", ";
     out << "HP " << state.getHitPoints() << "/" << state.getHitPointsLimit() << ", ";
-    out << "Damage "<<state.getDamage();
+    out << "Damage "<<state.getDamage() << ", ";
+    if ( state.getIsWolf() ) {
+        out << "Unit in wolf form";
+    }
     
     return out;
 }

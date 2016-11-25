@@ -1,6 +1,6 @@
 #include "Spellcaster.h"
 
-Spellcaster::Spellcaster(std::string nickName, int damage, int hitPoints, int manaPoints, std::string title) : Unit(nickName, damage, hitPoints, title), manaPoints(manaPoints), manaPointsLimit(manaPoints) {
+Spellcaster::Spellcaster(std::string nickName, int damage, int hitPoints, int manaPoints, std::string title, bool isUndead) : Unit(nickName, damage, hitPoints, title, isUndead, false, false), manaPoints(manaPoints), manaPointsLimit(manaPoints) {
     this->spellBook = new std::map<CAST_ENUM, Spell>();
     this->spellBook->insert(std::pair<CAST_ENUM, Spell>(Fireball, Spell(Fireball, 40, 30, true)));
     this->spellBook->insert(std::pair<CAST_ENUM, Spell>(Heal, Spell(Heal, 45, 35, false)));

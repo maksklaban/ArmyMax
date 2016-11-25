@@ -13,7 +13,7 @@ class Spellcaster : public Unit {
         
         void ensureIsAlive();
     public:
-        Spellcaster(std::string nickName, int damage, int hitPoints, int manaPoints, std::string title);
+        Spellcaster(std::string nickName, int damage, int hitPoints, int manaPoints, std::string title, bool isUndead=false);
         virtual ~Spellcaster();
         
         const std::map<CAST_ENUM, Spell>& getSpellBook() const;

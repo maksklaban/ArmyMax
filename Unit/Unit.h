@@ -5,11 +5,14 @@
 #include "../State/State.h"
 #include "../exception.h"
 #include "Ability.h"
+#include "Observer.h"
+#include "Subject.h"
 
-class Unit : public Ability{
+class Unit : public Ability, public Observer, public Subject {
     protected:
         State* state;
-        Ability* ability;
+        State* wolfState;
+        State* normalState;
         std::string nickName;
         bool isUndead;
         
@@ -22,14 +25,16 @@ class Unit : public Ability{
         const int getHitPoints() const;
         const int getHitPointsLimit() const;
         const bool getIsUndead() const;
+        const bool getIsWolf() const;
         const std::string& getTitle() const;
         const State& getState() const;
-        const Ability& getAbility() const;
         
         virtual void takeMagDamage(int dmg);
         void takePhysicalDamage(int dmg);
         void addHitPoints(int hp);
         
+        void transformInToWolf();
+        void transformBack();
         virtual void attack(Unit* enemy);
         virtual void counterAttack(Unit* enemy);
 };

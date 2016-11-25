@@ -11,4 +11,6 @@ class NoManaPointsException {};
 
 class CantTurnThisUnitException {};
 
+class UnitCantTransformException {};
+
 #endif // EXCEPTION_H

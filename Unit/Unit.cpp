@@ -1,6 +1,9 @@
 #include "Unit.h"
 
-Unit::Unit(std::string nickName, int damage, int hitPoints, std::string title, bool isUndead, bool isVampire, bool isWerewolf) : nickName(nickName), isUndead(isUndead), state(new State(hitPoints, damage, title)), ability(new Ability(isVampire, isWerewolf)) {}
+Unit::Unit(std::string nickName, int damage, int hitPoints, std::string title, bool isUndead, bool isVampire, bool isWerewolf) : nickName(nickName), isUndead(isUndead), state(new State(hitPoints, damage, title, false)), Ability(isVampire, isWerewolf), Subject() {
+    this->normalState = this->state;
+    this->wolfState = new State(hitPoints, (damage * 2), "WolfForm", true);
+}
 
 Unit::~Unit() {
     delete state;
@@ -26,6 +29,10 @@ const bool Unit::getIsUndead() const {
     return this->isUndead;
 }
 
+const bool Unit::getIsWolf() const {
+    return this->state->getIsWolf();
+}
+
 const std::string& Unit::getTitle() const {
     return this->state->getTitle();
 }
@@ -34,12 +41,12 @@ const State& Unit::getState() const {
     return *(this->state);
 }
 
-const Ability& Unit::getAbility() const {
-    return *(this->ability);
-}
-
 void Unit::takeMagDamage(int dmg) {
-    this->state->takeMagDamage(dmg);
+    if ( !(this->getIsWolf())) {
+        this->state->takeDamage(dmg);
+    } else {
+        this->state->takeDamage(dmg*2);
+    }
 }
 
 void Unit::takePhysicalDamage(int dmg) {
@@ -48,6 +55,22 @@ void Unit::takePhysicalDamage(int dmg) {
 
 void Unit::addHitPoints(int hp) {
     this->state->addHitPoints(hp);
+}
+
+void Unit::transformInToWolf() {
+    if ( this->isWerewolf ) {
+        this->state = this->wolfState;
+    } else {
+        throw UnitCantTransformException();
+    }
+}
+
+void Unit::transformBack() {
+    if ( this->getIsWolf() ) {
+        this->state = this->normalState;
+    } else {
+        throw UnitCantTransformException();
+    }
 }
 
 void Unit::attack(Unit* enemy) {
