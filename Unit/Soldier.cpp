@@ -4,6 +4,3 @@ Soldier::Soldier(std::string nickName, int damage, int hitPoints, std::string ti
 
 Soldier::~Soldier() {}
 
-void Soldier::attack(Unit* enemy) {
-    Unit::attack(enemy);
-}

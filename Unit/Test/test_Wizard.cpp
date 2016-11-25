@@ -1,6 +1,7 @@
 #include "../Wizard.h"
 #include "../Soldier.h"
 #include "../Rogue.h"
+#include "../Berserk.h"
 #include "catch.hpp"
 #include <iostream>
 
@@ -12,6 +13,26 @@ TEST_CASE("test Wizard class", "[Wizard]") {
     Soldier* f4 = new Soldier("PETYA");
     Rogue* f5 = new Rogue("KATYA");
     Rogue* f6 = new Rogue("voRishKA");
+    Berserk* f7 = new Berserk("BEZUMEC");
+    Berserk* f8 = new Berserk("NEUDERZHIMIY");
+
+
+    SECTION("Berserk test") {
+        REQUIRE(f7->getDamage() == 25);
+        REQUIRE(f8->getHitPoints() == 210);
+
+        f7->attack(f8);
+
+        REQUIRE(f8->getHitPoints() == 185);
+        REQUIRE(f7->getHitPoints() == 198);
+
+        f2->castSpell(f8, Fireball);
+        f2->castSpell(f7, Heal);
+
+        REQUIRE(f7->getHitPoints() == 198);
+        REQUIRE(f8->getHitPoints() == 185);
+        // REQUIRE(f3->getNickName() == "VASYA");
+    }
 
     SECTION("Rogue test") {
         REQUIRE(f5->getDamage() == 40);

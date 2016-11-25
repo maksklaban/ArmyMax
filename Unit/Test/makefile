@@ -1,7 +1,7 @@
 all: test.out
 
-test.out: main.o Spellcaster.o Wizard.o test_Wizard.o Unit.o State.o Spell.o Ability.o Observer.o Subject.o Soldier.o Rogue.o
-	g++ -o test.out Spellcaster.o main.o Wizard.o test_Wizard.o Unit.o State.o Spell.o Ability.o Subject.o Observer.o Soldier.o Rogue.o && ./test.out
+test.out: main.o Spellcaster.o Wizard.o test_Wizard.o Unit.o State.o Spell.o Ability.o Observer.o Subject.o Soldier.o Rogue.o Berserk.o
+	g++ -o test.out Spellcaster.o main.o Wizard.o test_Wizard.o Unit.o State.o Spell.o Ability.o Subject.o Observer.o Soldier.o Rogue.o Berserk.o && ./test.out
 
 main.o:
 	g++ -c main.cpp
@@ -11,6 +11,9 @@ test_Wizard.o:
 
 Wizard.o:
 	g++ -c ../Wizard.cpp
+
+Berserk.o:
+	g++ -c ../Berserk.cpp
 
 Soldier.o:
 	g++ -c ../Soldier.cpp

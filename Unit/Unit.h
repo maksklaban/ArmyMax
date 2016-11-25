@@ -31,7 +31,7 @@ class Unit : public Ability, public Observer, public Subject {
         
         virtual void takeMagDamage(int dmg);
         void takePhysicalDamage(int dmg);
-        void addHitPoints(int hp);
+        virtual void addHitPoints(int hp);
         
         void transformInToWolf();
         void transformBack();
