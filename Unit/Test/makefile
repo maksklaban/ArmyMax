@@ -1,13 +1,16 @@
 all: test.out
 
-test.out: main.o Spellcaster.o Wizard.o test_Wizard.o Unit.o State.o Spell.o Ability.o Observer.o Subject.o Soldier.o Rogue.o Berserk.o Vampire.o Werewolf.o Healer.o
-	g++ -o test.out Spellcaster.o main.o Wizard.o test_Wizard.o Unit.o State.o Spell.o Ability.o Subject.o Observer.o Soldier.o Rogue.o Berserk.o Vampire.o Werewolf.o Healer.o && ./test.out
+test.out: main.o Spellcaster.o Wizard.o test_Wizard.o Unit.o State.o Spell.o Ability.o Observer.o Subject.o Soldier.o Rogue.o Berserk.o Vampire.o Werewolf.o Healer.o Priest.o 
+	g++ -o test.out Spellcaster.o main.o Wizard.o test_Wizard.o Unit.o State.o Spell.o Ability.o Subject.o Observer.o Soldier.o Rogue.o Berserk.o Vampire.o Werewolf.o Healer.o Priest.o && ./test.out
 
 main.o:
 	g++ -c main.cpp
 
 test_Wizard.o:
 	g++ -c test_Wizard.cpp
+
+Priest.o:
+	g++ -c ../Priest.cpp
 
 Wizard.o:
 	g++ -c ../Wizard.cpp

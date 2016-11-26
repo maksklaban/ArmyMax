@@ -64,7 +64,7 @@ void Unit::turnInVampire(Unit* enemy) {
 }
 
 void Unit::transformInToWolf() {
-    if ( this->isWerewolf ) {
+    if ( this->isWerewolf && this->getHitPoints() > 0 ) {
         this->state = this->wolfState;
     } else {
         throw UnitCantTransformException();
@@ -72,7 +72,7 @@ void Unit::transformInToWolf() {
 }
 
 void Unit::transformBack() {
-    if ( this->getIsWolf() ) {
+    if ( this->getIsWolf() && this->getHitPoints() > 0 ) {
         this->state = this->normalState;
     } else {
         throw UnitCantTransformException();
