@@ -4,6 +4,7 @@
 #include "../Berserk.h"
 #include "../Vampire.h"
 #include "../Werewolf.h"
+#include "../Healer.h"
 #include "catch.hpp"
 #include <iostream>
 
@@ -24,6 +25,40 @@ TEST_CASE("test Wizard class", "[Wizard]") {
     Vampire* f10 = new Vampire("ConstantinVladimirovich");
     Werewolf* f11 = new Werewolf("SobakaUlubaka");
     Werewolf* f12 = new Werewolf("Barbos");
+    Healer* f13 = new Healer("Dohtor");
+    Healer* f14 = new Healer("VRACH");
+
+
+    SECTION("Healer test") {
+        REQUIRE(f13->getDamage() == 20 );
+        REQUIRE(f13->getHitPoints() == 160);
+        
+        f13->castSpell(f14, Fireball);
+        f13->castSpell(f14, Fireball);
+        
+        REQUIRE(f14->getHitPoints() == 120);
+        
+        f13->castSpell(f14, Heal);
+        
+        REQUIRE(f14->getHitPoints() == 160);
+        
+        f13->attack(f14);
+        
+        REQUIRE(f14->getHitPoints() == 140);
+        REQUIRE(f13->getHitPoints() == 150);
+        REQUIRE(f13->getIsVampire() == false);
+        REQUIRE(f14->getIsUndead() == false);
+        REQUIRE(f13->getIsWolf() == false);
+        REQUIRE(f13->getManaPoints() == 15);
+
+        f12->turnInWerewolf(f13);
+
+        f13->transformInToWolf();
+
+        f14->castSpell(f13, Fireball);
+
+        REQUIRE(f13->getHitPoints() == 200);
+    }
 
     SECTION("Vampire test") {
         REQUIRE(f9->getDamage() == 30);
@@ -81,6 +116,10 @@ TEST_CASE("test Wizard class", "[Wizard]") {
         f11->turnInWerewolf(test2);
 
         REQUIRE(test2->getIsWerewolf() == true);
+
+        test2->transformInToWolf();
+
+        REQUIRE(test2->getIsWolf() == true);
     }
 
 

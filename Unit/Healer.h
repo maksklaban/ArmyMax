@@ -5,12 +5,10 @@
 
 class Healer : public Spellcaster {
     public:
-        Healer(std::string nickName, int damage=35, int hitPoints=140, int manaPoints=110, std::string title="Healer");
+        Healer(std::string nickName, int damage=20, int hitPoints=160, int manaPoints=110, std::string title="Healer");
         virtual ~Healer();
         
-        virtual void castFireball(Unit* enemy);
-        virtual void castHeal(Unit* other);
-        virtual void castManaRestore(Spellcaster* other);
+        virtual void castSpell(Unit* other, CAST_ENUM spell);
 };
 
 
