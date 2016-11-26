@@ -1,6 +1,6 @@
 #include "Unit.h"
 
-Unit::Unit(std::string nickName, int damage, int hitPoints, std::string title, bool isUndead, bool isVampire, bool isWerewolf) : nickName(nickName), isUndead(isUndead), state(new State(hitPoints, damage, title, false)), Ability(isVampire, isWerewolf), Subject() {
+Unit::Unit(std::string nickName, int damage, int hitPoints, std::string title, bool isUndead, bool isVampire, bool isWerewolf) : nickName(nickName), isUndead(isUndead), state(new State(hitPoints, damage, title, false)), Ability(isVampire, isWerewolf), Subject(), Observer() {
     this->normalState = new State(hitPoints, damage, title, false);
     this->wolfState = new State((hitPoints * 1.5), (damage * 2), "WolfForm", true);
 }

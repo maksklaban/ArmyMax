@@ -8,6 +8,7 @@
 #include "../Priest.h"
 #include "../Demon.h"
 #include "../Warlock.h"
+#include "../Necromanser.h"
 #include "catch.hpp"
 #include <iostream>
 
@@ -38,6 +39,8 @@ TEST_CASE("test Wizard class", "[Wizard]") {
     Warlock *f18 = new Warlock("NerZul");
     Demon *f19 = f17->summonDemon();
     Demon *f20 = f17->summonDemon();
+    Necromanser *f21 = new Necromanser("Negr");
+    Necromanser *f22 = new Necromanser("Lich");
 
     SECTION("Priest test") {
         REQUIRE(f15->getDamage() == 20 );
@@ -276,5 +279,41 @@ TEST_CASE("test Wizard class", "[Wizard]") {
             REQUIRE(f19->getHitPoints() == 158);
             REQUIRE(test5->getHitPoints() == 165);
         }
+    }
+
+    SECTION("Necromanser test") {
+        REQUIRE(f21->getDamage() == 20 );
+        REQUIRE(f21->getHitPoints() == 140);
+        
+        f21->castSpell(f22, Fireball);
+        
+        REQUIRE(f22->getHitPoints() == 100);
+        
+        f21->castSpell(f22, Heal);
+        
+        REQUIRE(f22->getHitPoints() == 122);
+        
+        f21->attack(f22);
+        
+        REQUIRE(f22->getHitPoints() == 102);
+        REQUIRE(f21->getHitPoints() == 130);
+        REQUIRE(f21->getIsVampire() == false);
+        REQUIRE(f22->getIsUndead() == true);
+        REQUIRE(f21->getIsWolf() == false);
+        REQUIRE(f21->getManaPoints() == 45);
+
+        f21->attack(f22);
+        f21->attack(f22);
+        f21->attack(f22);
+        f21->attack(f22);
+        f21->attack(f22);
+        f21->attack(f22);
+
+        REQUIRE(f22->getHitPoints() == 0);
+
+        delete f22;
+        
+        REQUIRE(f21->getHitPoints() == 98);
+
     }
 };
