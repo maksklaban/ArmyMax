@@ -1,6 +1,6 @@
 #include "Demon.h"
 
-Demon::Demon(std::string nickName, Warlock* owner, int damage, int hitPoints, std::string title) : Soldier(nickName, damage, hitPoints, title), owner(owner) {}
+Demon::Demon(Unit* owner, std::string nickName, int damage, int hitPoints, std::string title) : Soldier(nickName, damage, hitPoints, title), owner(owner) {}
 
 Demon::~Demon() {}
 

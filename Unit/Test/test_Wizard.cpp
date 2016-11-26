@@ -6,6 +6,8 @@
 #include "../Werewolf.h"
 #include "../Healer.h"
 #include "../Priest.h"
+#include "../Demon.h"
+#include "../Warlock.h"
 #include "catch.hpp"
 #include <iostream>
 
@@ -18,6 +20,7 @@ TEST_CASE("test Wizard class", "[Wizard]") {
     Soldier* f4 = new Soldier("PETYA");
     Soldier* test = new Soldier("m9so");
     Soldier* test1 = new Soldier("m9sko");
+    Soldier* test5 = new Soldier("m9sko1");
     Rogue* f5 = new Rogue("KATYA");
     Rogue* f6 = new Rogue("voRishKA");
     Berserk* f7 = new Berserk("BEZUMEC");
@@ -31,6 +34,10 @@ TEST_CASE("test Wizard class", "[Wizard]") {
     Healer* f14 = new Healer("VRACH");
     Priest* f15 = new Priest("Ioann");
     Priest* f16 = new Priest("KirillSv9toy");
+    Warlock *f17 = new Warlock("GuldAn");
+    Warlock *f18 = new Warlock("NerZul");
+    Demon *f19 = f17->summonDemon();
+    Demon *f20 = f17->summonDemon();
 
     SECTION("Priest test") {
         REQUIRE(f15->getDamage() == 20 );
@@ -229,5 +236,45 @@ TEST_CASE("test Wizard class", "[Wizard]") {
         REQUIRE(f2->getIsUndead() == false);
         REQUIRE(f1->getIsWolf() == false);
         REQUIRE(f1->getManaPoints() == 35);
+    }
+
+    SECTION("Warlock test") {
+        REQUIRE(f17->getDamage() == 15 );
+        REQUIRE(f17->getHitPoints() == 140);
+        
+        f17->castSpell(f18, Fireball);
+        
+        REQUIRE(f18->getHitPoints() == 100);
+        
+        f17->castSpell(f18, Heal);
+        
+        REQUIRE(f18->getHitPoints() == 122);
+        
+        f17->attack(f18);
+        
+        REQUIRE(f18->getHitPoints() == 107);
+        REQUIRE(f17->getHitPoints() == 133);
+        REQUIRE(f17->getIsVampire() == false);
+        REQUIRE(f18->getIsUndead() == false);
+        REQUIRE(f17->getIsWolf() == false);
+        REQUIRE(f17->getManaPoints() == 35);
+
+        // f17->summonDemon();
+
+        SECTION("Soldiers test") {
+            REQUIRE(f19->getDamage() == 35);
+            REQUIRE(f19->getHitPoints() == 190);
+
+            f19->attack(f20);
+
+            REQUIRE(f19->getHitPoints() == 173);
+            REQUIRE(f20->getHitPoints() == 155);
+            REQUIRE(f19->getNickName() == "Part of Legion");
+
+            f19->attack(test5); 
+
+            REQUIRE(f19->getHitPoints() == 158);
+            REQUIRE(test5->getHitPoints() == 165);
+        }
     }
 };

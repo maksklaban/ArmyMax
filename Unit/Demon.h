@@ -3,16 +3,16 @@
 
 #include "Soldier.h"
 
-// class Warlock;
+class Warlock;
 
 class Demon : public Soldier {
     protected:
-        Warlock* owner;
+        Unit* owner;
 
-        void ensureHisOwner();
-        
+        void ensureHisOwner(Unit* enemy);
+
     public:
-        Demon(std::string nickName, int damage=35, int hitPoints=190, std::string title="Demon", Warlock* owner);
+        Demon(Unit* owner, std::string nickName="Part of Legion", int damage=35, int hitPoints=190, std::string title="Demon");
         virtual ~Demon();
 
         virtual void attack(Unit* enemy);
