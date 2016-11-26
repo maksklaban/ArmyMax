@@ -15,4 +15,6 @@ class UnitCantTransformException {};
 
 class AbilityIsNotAvaibleException {};
 
+class UnitCantAttackHisOwnerException {};
+
 #endif // EXCEPTION_H
