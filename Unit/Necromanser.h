@@ -10,7 +10,7 @@ class Necromanser : public Spellcaster {
 
         virtual void castSpell(Unit* other, CAST_ENUM spell);
         virtual void attack(Unit* enemy);
-        virtual void update(Unit* enemy);
+        virtual void update(Subject* enemy);
 };
 
 #endif //NECROMANSER_H

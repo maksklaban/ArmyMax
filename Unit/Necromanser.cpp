@@ -23,8 +23,8 @@ void Necromanser::attack(Unit* enemy) {
     this->addSubject(enemy);
 }
 
-void Necromanser::update(Unit* enemy) {
-    this->addHitPoints(enemy->getHitPointsLimit() / 5);
-
+void Necromanser::update(Subject* enemy) {
     Observer::update(enemy);
+
+    this->addHitPoints(this->getDamage());
 }

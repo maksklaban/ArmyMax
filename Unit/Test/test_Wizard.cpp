@@ -302,18 +302,19 @@ TEST_CASE("test Wizard class", "[Wizard]") {
         REQUIRE(f21->getIsWolf() == false);
         REQUIRE(f21->getManaPoints() == 45);
 
-        f21->attack(f22);
-        f21->attack(f22);
-        f21->attack(f22);
-        f21->attack(f22);
-        f21->attack(f22);
-        f21->attack(f22);
+        f21->attack(test5);
+        // f21->attack(f22);
+        // f21->attack(f22);
+        // f21->attack(f22);
+        // f21->attack(f22);
+        // f21->attack(f22);
 
-        REQUIRE(f22->getHitPoints() == 0);
+        // REQUIRE(f22->getHitPoints() == 0);
+        REQUIRE(f21->getHitPoints() == 115);
 
-        delete f22;
+        delete test5;
         
-        REQUIRE(f21->getHitPoints() == 98);
+        REQUIRE(f21->getHitPoints() == 135);
 
     }
 };

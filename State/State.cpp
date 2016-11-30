@@ -2,26 +2,6 @@
 
 State::State(int hitPoints, int damage, std::string title, bool isWolf) : hitPoints(hitPoints), hitPointsLimit(hitPoints), damage(damage), title(title), isWolf(isWolf) {}
 
-// State::State(const State& other) {
-//     ensureIsAlive();
-    
-//     this->hitPointsLimit = other.hitPointsLimit;
-//     this->damage = other.damage;
-//     this->title = other.title;
-//     this->isWolf = other.isWolf;
-// }
-
-// State& State::operator=(const State& other) {
-//     ensureIsAlive();
-
-//     this->hitPointsLimit = other.hitPointsLimit;
-//     this->damage = other.damage;
-//     this->title = other.title;
-//     this->isWolf = isWolf;
-
-//     return *this;
-// }
-
 State::~State() {}
 
 const int State::getHitPoints() const {

@@ -99,6 +99,8 @@ void Unit::counterAttack(Unit* enemy) {
 
 std::ostream& operator<<(std::ostream& out, const Unit& unit) {
     out << unit.getNickName() << " " << (Ability)unit << unit.getState();
-    
+    if ( unit.getIsUndead() ) {
+        out << ", Undead";
+    }
     return out;
 }

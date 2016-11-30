@@ -61,7 +61,7 @@ Spellcaster.o:
 	g++ -c ../Spellcaster.cpp
 
 State.o:
-	g++ -c /home/maks/Devclub/DZ6\ week/ArmyMax/State/State.cpp
+	g++ -c ../../State/State.cpp
 
 clean:
 	rm -f *.o && clear

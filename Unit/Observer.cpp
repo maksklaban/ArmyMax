@@ -23,7 +23,7 @@ void Observer::notifySubjects() {
 
 void Observer::update(Subject* another) {
     std::set<Subject*>::iterator it = set->find(another);
-
+    
     if ( it != set->end() ) {
         set->erase(it);
     }
