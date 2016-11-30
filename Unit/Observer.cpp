@@ -26,7 +26,5 @@ void Observer::update(Subject* another) {
 
     if ( it != set->end() ) {
         set->erase(it);
-    } else {
-        return;
     }
 }

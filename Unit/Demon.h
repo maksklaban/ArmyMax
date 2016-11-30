@@ -3,8 +3,6 @@
 
 #include "Soldier.h"
 
-class Warlock;
-
 class Demon : public Soldier {
     protected:
         Unit* owner;

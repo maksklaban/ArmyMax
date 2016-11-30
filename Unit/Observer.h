@@ -5,6 +5,7 @@
 #include "Subject.h"
 
 class Subject;
+
 class Observer {
     protected:
         std::set<Subject*>* set;

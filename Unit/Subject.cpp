@@ -15,8 +15,6 @@ void Subject::detach(Observer* another) {
 
     if ( it != observerList->end() ) {
         observerList->erase(it);
-    } else {
-        return;
     }
 }
 
